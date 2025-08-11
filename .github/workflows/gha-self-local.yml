@@ -25,5 +25,5 @@ jobs:
 
       - name: Deploy to local directory
         run: |
-          sudo rm -rf /var/www/html/my-react-app/*
-          sudo cp -r build/* /var/www/html/my-react-app/
+          sudo rm -rf /var/www/html/*
+          sudo cp -r build/* /var/www/html/
