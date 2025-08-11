@@ -27,6 +27,7 @@ pipeline {
                 // Adjust NGINX_PATH to your actual Nginx HTML directory
                 sh 'sudo rm -rf /var/www/html/*'
                 sh 'sudo cp -r build/* /var/www/html/'
+                sh 'sudo systemctl reload nginx'
             }
         }
     }
