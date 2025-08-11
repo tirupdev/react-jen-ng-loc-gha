@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/tirupdev/react-jen-ng-loc.git'
+                git branch: 'tirup1', url: 'https://github.com/tirupdev/react-jen-ng-loc.git'
             }
         }
 
