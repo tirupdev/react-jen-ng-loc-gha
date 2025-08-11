@@ -5,13 +5,13 @@ pipeline {
         DEV_SERVER = "localhost"   // Dev environment on local machine
         STAGE_SERVER = "localhost" // Staging environment on local machine
         PROD_SERVER = "localhost"  // Production environment on local machine
-        BRANCH = "envi"
+        BRANCH = "main"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: "${BRANCH}", url: 'https://github.com/tirupdev/react-jen-ng-loc.git'
+                git branch: "${BRANCH}", url: 'https://github.com/your-org/your-repo.git'
             }
         }
 
@@ -25,16 +25,16 @@ pipeline {
         stage('Deploy to Dev') {
             steps {
                 echo "Deploying to Development (Localhost)"
-                sh "rm -rf /var/www/html/*"
-                sh "cp -r build/* /var/www/html/"
+                sh "sudo rm -rf /var/www/html/*"
+                sh "sudo cp -r build/* /var/www/html/"
             }
         }
 
         stage('Deploy to Staging') {
             steps {
                 echo "Deploying to Staging (Localhost)"
-                sh "rm -rf /var/www/html/*"
-                sh "cp -r build/* /var/www/html/"
+                sh "sudo rm -rf /var/www/html/*"
+                sh "sudo cp -r build/* /var/www/html/"
             }
         }
 
@@ -47,8 +47,8 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 echo "Deploying to Production (Localhost)"
-                sh "rm -rf /var/www/html/*"
-                sh "cp -r build/* /var/www/html/"
+                sh "sudo rm -rf /var/www/html/*"
+                sh "sudo cp -r build/* /var/www/html/"
             }
         }
     }
