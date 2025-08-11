@@ -1,33 +1,54 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Clone') {
-            steps {
-                git branch: 'prod', url: 'https://github.com/tirupdev/react-jen-ng-loc.git'
-            }
-        }
+    environment {
+        DEV_SERVER = "localhost"   // Dev environment on local machine
+        STAGE_SERVER = "localhost" // Staging environment on local machine
+        PROD_SERVER = "localhost"  // Production environment on local machine
+        BRANCH = "main"
+    }
 
-        stage('Install') {
+    stages {
+        stage('Checkout Code') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
-                sh 'npm install'
+                git branch: "${BRANCH}", url: 'https://github.com/tirupdev/react-jen-ng-loc.git'
             }
         }
 
         stage('Build') {
             steps {
+                sh 'npm install'
                 sh 'npm run build'
             }
         }
 
-        stage('Deploy to Nginx') {
+        stage('Deploy to Dev') {
             steps {
-                // Adjust NGINX_PATH to your actual Nginx HTML directory
-                sh 'sudo rm -rf /var/www/html/*'
-                sh 'sudo cp -r build/* /var/www/html/'
-                sh 'sudo systemctl reload nginx'
+                echo "Deploying to Development (Localhost)"
+                sh "rm -rf /var/www/html/*"
+                sh "cp -r build/* /var/www/html/"
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying to Staging (Localhost)"
+                sh "rm -rf /var/www/html/*"
+                sh "cp -r build/* /var/www/html/"
+            }
+        }
+
+        stage('Approval for Prod') {
+            steps {
+                input message: 'Approve deployment to Production?'
+            }
+        }
+
+        stage('Deploy to Prod') {
+            steps {
+                echo "Deploying to Production (Localhost)"
+                sh "rm -rf /var/www/html/*"
+                sh "cp -r build/* /var/www/html/"
             }
         }
     }
