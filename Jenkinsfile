@@ -5,7 +5,7 @@ pipeline {
         DEV_SERVER = "localhost"   // Dev environment on local machine
         STAGE_SERVER = "localhost" // Staging environment on local machine
         PROD_SERVER = "localhost"  // Production environment on local machine
-        BRANCH = "main"
+        BRANCH = "envi"
     }
 
     stages {
