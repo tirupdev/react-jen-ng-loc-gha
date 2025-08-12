@@ -2,7 +2,7 @@ name: Nightly Build and Deploy
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Runs every day at 02:00 AM UTC
+    - cron: '35 12 * * *'  # Runs every day at 12:35 PM UTC
 
 jobs:
   build-and-deploy:
