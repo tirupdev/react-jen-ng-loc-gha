@@ -6,10 +6,10 @@ on:
       environment:
         description: 'Select environment to deploy'
         required: true
-        default: 'envi'
+        default: 'dev'
         type: choice
         options:
-          - envi
+          - dev
           - prod
 
 jobs:
