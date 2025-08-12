@@ -9,7 +9,7 @@ on:
         default: 'envi'
         type: choice
         options:
-          - dev
+          - envi
           - prod
 
 jobs:
