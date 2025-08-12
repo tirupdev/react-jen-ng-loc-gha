@@ -1,0 +1,47 @@
+name: React Deploy Dev/Prod to /var/www/html
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment to deploy'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React app
+        run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy React App to /var/www/html
+        run: |
+          echo "Deploying to environment: ${{ github.event.inputs.environment }}"
+          sudo rm -rf /var/www/html/*
+          sudo mkdir -p /var/www/html
+          sudo cp -r build/* /var/www/html/

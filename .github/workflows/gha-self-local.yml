@@ -1,9 +1,7 @@
 name: React Build and Deploy
 
 on:
-  push:
-    branches: [envi]
-
+  workflow_dispatch:
 jobs:
   build-deploy:
     runs-on: self-hosted
